@@ -91,8 +91,17 @@ function canQueenCaptureKing(/* queen, king */) {
  *  2, 2, 5   => false
  *  3, 0, 3   => false
  */
-function isIsoscelesTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isIsoscelesTriangle(a, b, c) {
+  if (a <= 0 || b <= 0 || c <= 0) {
+    return false;
+  }
+  if (a + b <= c || b + c <= a || c + a <= b) {
+    return false;
+  }
+  if (a === b || a === c || b === c) {
+    return true;
+  }
+  return false;
 }
 
 /**
@@ -109,8 +118,35 @@ function isIsoscelesTriangle(/* a, b, c */) {
  *  10  => X
  *  26  => XXVI
  */
-function convertToRomanNumerals(/* num */) {
-  throw new Error('Not implemented');
+function convertToRomanNumerals(num) {
+  let fot = '';
+  let err = num;
+
+  while (err >= 10) {
+    fot += 'X';
+    err -= 10;
+  }
+
+  while (err === 9) {
+    fot += 'IX';
+    err -= 9;
+  }
+
+  while (err >= 5) {
+    fot += 'V';
+    err -= 5;
+  }
+
+  while (err === 4) {
+    fot += 'IV';
+    err -= 4;
+  }
+
+  while (err >= 1) {
+    fot += 'I';
+    err -= 1;
+  }
+  return fot;
 }
 
 /**
@@ -128,8 +164,58 @@ function convertToRomanNumerals(/* num */) {
  *  '10,5'    => 'one zero point five'
  *  '1950.2'  => 'one nine five zero point two'
  */
-function convertNumberToString(/* numberStr */) {
-  throw new Error('Not implemented');
+function convertNumberToString(numberStr) {
+  const dok = numberStr;
+  let newStr = '';
+  for (let i = 0; i < dok.length; i += 1) {
+    switch (dok[i]) {
+      case '-':
+        newStr += 'minus';
+        break;
+      case '0':
+        newStr += 'zero';
+        break;
+      case '1':
+        newStr += 'one';
+        break;
+      case '2':
+        newStr += 'two';
+        break;
+      case '3':
+        newStr += 'three';
+        break;
+      case '4':
+        newStr += 'four';
+        break;
+      case '5':
+        newStr += 'five';
+        break;
+      case '6':
+        newStr += 'six';
+        break;
+      case '7':
+        newStr += 'seven';
+        break;
+      case '8':
+        newStr += 'eight';
+        break;
+      case '9':
+        newStr += 'nine';
+        break;
+      case ',':
+        newStr += 'point';
+        break;
+      case '.':
+        newStr += 'point';
+        break;
+      default:
+        break;
+    }
+    if (i < dok.length - 1) {
+      newStr += ' ';
+    }
+  }
+  return newStr;
 }
 
 /**
