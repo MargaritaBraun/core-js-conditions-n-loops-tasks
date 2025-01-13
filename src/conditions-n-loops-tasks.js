@@ -463,57 +463,24 @@ function rotateMatrix(matrix) {
  *  [2, 9, 5, 9]    => [2, 5, 9, 9]
  *  [-2, 9, 5, -3]  => [-3, -2, 5, 9]
  */
-function sortByAsc(arr) {
+function sortByAsc(arr, left = 0, right = arr.length - 1) {
   const sorted = arr;
+  if (left < right) {
+    const myLoad = sorted[right];
+    let i = left;
 
-  if (arr.length <= 1) {
-    return arr;
-  }
-
-  const senterelIndex = Math.floor(sorted.length / 2);
-
-  const left = [];
-  const right = [];
-
-  for (let i = 0; i < sorted.length; i += 1) {
-    if (i < senterelIndex) {
-      left[i] = sorted[i];
-    } else {
-      right[i - senterelIndex] = sorted[i];
+    for (let j = left; j < right; j += 1) {
+      if (arr[j] < myLoad) {
+        [sorted[i], sorted[j]] = [sorted[j], sorted[i]];
+        i += 1;
+      }
     }
+    [sorted[i], sorted[right]] = [sorted[right], sorted[i]];
+
+    sortByAsc(sorted, left, i - 1);
+    sortByAsc(sorted, i + 1, right);
   }
-
-  sortByAsc(left);
-  sortByAsc(right);
-
-  let i = 0;
-  let j = 0;
-  let k = 0;
-
-  while (i < left.length && j < right.length) {
-    if (left[i] <= right[j]) {
-      sorted[k] = left[i];
-      i += 1;
-    } else {
-      sorted[k] = right[j];
-      j += 1;
-    }
-    k += 1;
-  }
-
-  while (i < left.length) {
-    sorted[k] = left[i];
-    i += 1;
-    k += 1;
-  }
-
-  while (j < right.length) {
-    sorted[k] = right[j];
-    j += 1;
-    k += 1;
-  }
-
-  return sorted;
+  return arr;
 }
 /**
  * Shuffles characters in a string so that the characters with an odd index are moved to the end of the string at each iteration.
@@ -548,8 +515,7 @@ function shuffleChar(str, iterations) {
     left = '';
     right = '';
   }
-  throw new Error('Not implemented');
-  // return newStr;
+  return newStr;
 }
 
 /**
@@ -569,9 +535,8 @@ function shuffleChar(str, iterations) {
  * @param {number} number The source number
  * @returns {number} The nearest larger number, or original number if none exists.
  */
-function getNearestBigger(number) {
-  const arr = number.toString().split('');
-  return arr.join('');
+function getNearestBigger(/* number */) {
+  throw new Error('Not implemented');
 }
 
 module.exports = {
